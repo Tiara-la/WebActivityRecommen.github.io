@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+header {
+    height: 100vh;
+}
+.navbar-style {
+    box-shadow: 0 5px 10px #efefef;
+    text-transform: uppercase;
+}
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+.navbar-brand {
+    color: #410042;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+/* .navbar-nav { */
+ /* padding-left: 700px; */
+ /* color: #410042;
+} */
+.icon-bar {
+    background: #410042;
+}
+
+/* .jumbotron {
+    margin: 20px;
+} */
+.img-jumbotron {
+   height: 430px;
+   padding: 2px 10px;
+   border-radius: 50px;
+}
+li a {
+    color: #410042;
+}
+.judul {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 40px;
+}
+.deskripsi {
+    font-weight: bold;
+    color: #410042;
+    text-align: center;
+    font-size: 20px;
+}
+p{
+    font-size: 15px;
+}
+
+a.btn-mulai {
+    background-color: #410042;
+    color: white;
+}
+
+
+a.btn {
+    margin: 30px 10px;
+    width: 150px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+a.btn:hover {
+    background-color: #410042;
+    color: white;
+    box-shadow: 5px 5px 10px #999;
+    transition: 0.3s;
+}
+.banner-info {
+    margin: 30px 0;
+    padding: 0 30px;
+}
+
+.banner-img {
+    margin: 30px 0;
+    padding: 0 10%;
+}
