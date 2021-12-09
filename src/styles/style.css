@@ -51,7 +51,7 @@ p{
     font-size: 15px;
 }
 
-a.btn-mulai {
+a.btn-mulai, .btn {
     background-color: #410042;
     color: white;
 }
@@ -87,7 +87,7 @@ a.btn:hover {
 }
 
 .activity-judul {
-    margin-top: 30px;
+    margin-top: 3rem;
     color:  #410042;
     font-weight: 700;
     text-align: center;
@@ -100,11 +100,133 @@ a.btn:hover {
     width: 20%;
     margin-left: 40%;
   }
-
+.garis-2 {
+    size: 20px;
+    width: 50%;
+    margin-left: 25%;
+}
 .activity {
     /* margin: 1rem 0rem; */
     display: flex;
     align-content: center;
     align-items: center;
 }
+.judul-input {
+    margin-top: 30px;
+    color:  #410042;
+    font-weight: 700;
+    font-size: 50px;
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 8rem;
+    margin-top: 8rem;
+}
+.label-input {
+    color:  #410042;
+    font-weight: 700;
 
+}
+
+.form-input {
+    padding: 16px;
+    align-items: center;
+    margin-bottom: 8rem;
+    margin-top: 2rem;
+}
+.form-group {
+    margin: 20px 0;
+}
+
+.form-control {
+    border-radius: 20px;
+}
+
+.card {
+    border-radius: 30px;
+    margin-left: 6rem;
+    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.2);
+}
+.img-input {
+    height: 500px;
+    margin-left: 12rem;
+    border-radius: 20px;
+    /* opacity: 70%; */
+}
+
+.pengantar {
+    font-weight: bold;
+    font-size: 22px;
+
+}
+
+.list-group-item.active {
+    background-color: #774E90;
+    border-color: #774E90;
+}
+
+.hasil {
+    margin-top: 3rem;
+    margin-bottom: 8rem;
+}
+.about-card {
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+.about {
+    border-color: #774E90;
+    border-width: 4px;
+}
+.card-text {
+    text-align: center;
+    place-content: center;
+    font-family: 'Mirza', cursive;
+    font-size: 20px;
+}
+.card-img-top {
+    height: 200px;
+    width: 200px;
+   margin: 30px 0;
+}
+
+.img-thumbnail {
+    border-color: #774E90;
+}
+
+.contact {
+    background-color: #410042;
+    margin-top: 3rem;
+}
+
+.contact-judul {
+    margin-top: 2rem;
+    color:  white;
+    font-weight: 700;
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.contact-text {
+    text-align: center;
+    place-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    color: white;
+    margin-top: 2rem;
+}
+footer {
+    display: flex;
+    padding: 1rem 5rem;
+    margin-top: 20px;
+    color: white;
+    justify-content: center;
+    background-color: #410042;
+    text-align: center;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 767px){
+    .about-card {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+  }
