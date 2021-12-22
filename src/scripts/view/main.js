@@ -1,11 +1,11 @@
 import 'regenerator-runtime'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import $ from 'jquery'
-import './component/navbar.js'
-import './component/hasil.js'
-import './component/input.js'
-import './styles/style.css'
-import DataSource from '../data/data-source.js'
+import '../component/navbar.js'
+import '../component/hasil.js'
+import '../component/input.js'
+import '/src/styles/style.css'
+import '/src/assets'
 
 const main = () => {
     const inputBiodata = (activity) => {

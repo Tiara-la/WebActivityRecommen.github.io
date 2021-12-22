@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Mirza&family=Montserrat:wght@400;700&display=swap");
+
 * {
     margin: 0;
     padding: 0;
@@ -99,18 +101,21 @@ a.btn:hover {
     size: 20px;
     width: 20%;
     margin-left: 40%;
-  }
+}
+
 .garis-2 {
     size: 20px;
     width: 50%;
     margin-left: 25%;
 }
+
 .activity {
     /* margin: 1rem 0rem; */
     display: flex;
     align-content: center;
     align-items: center;
 }
+
 .judul-input {
     margin-top: 30px;
     color:  #410042;
@@ -120,10 +125,10 @@ a.btn:hover {
     margin-left: 8rem;
     margin-top: 8rem;
 }
+
 .label-input {
     color:  #410042;
     font-weight: 700;
-
 }
 
 .form-input {
@@ -132,6 +137,7 @@ a.btn:hover {
     margin-bottom: 8rem;
     margin-top: 2rem;
 }
+
 .form-group {
     margin: 20px 0;
 }
@@ -145,6 +151,7 @@ a.btn:hover {
     margin-left: 6rem;
     box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.2);
 }
+
 .img-input {
     height: 500px;
     margin-left: 12rem;
@@ -155,7 +162,6 @@ a.btn:hover {
 .pengantar {
     font-weight: bold;
     font-size: 22px;
-
 }
 
 .list-group-item.active {
@@ -167,34 +173,41 @@ a.btn:hover {
     margin-top: 3rem;
     margin-bottom: 8rem;
 }
+
 .about-card {
     margin-top: 3rem;
     margin-bottom: 5rem;
 }
+
 .about {
     border-color: #774E90;
     border-width: 4px;
 }
+
 .card-text {
     text-align: center;
     place-content: center;
     font-family: 'Mirza', cursive;
     font-size: 20px;
+    padding-bottom: 30px;
 }
+
 .card-img-top {
     height: 200px;
     width: 200px;
-   margin: 30px 0;
+    margin: 30px 0;
 }
 
 .img-thumbnail {
     border-color: #774E90;
 }
 
-.contact {
+.contact, .faq {
     background-color: #410042;
     margin-top: 3rem;
+
 }
+
 
 .contact-judul {
     margin-top: 2rem;
@@ -205,7 +218,7 @@ a.btn:hover {
     font-family: 'Montserrat', sans-serif;
 }
 
-.contact-text {
+.contact-text li {
     text-align: center;
     place-content: center;
     font-family: 'Montserrat', sans-serif;
@@ -229,4 +242,16 @@ footer {
         display: flex;
         flex-direction: column-reverse;
     }
+  }
+
+  .card-faq {
+    border-radius: 30px;
+    box-shadow: 0 7px 10px 0 rgba(0, 0, 0, 0.2);
+    background-color: white;
+  }
+
+  .form-input-faq {
+    padding: 16px;
+    align-items: center;
+    margin-top: 2rem;
   }

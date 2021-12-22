@@ -12,14 +12,29 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <link rel="stylesheet" href="./styles/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Mirza&family=Montserrat:wght@400;700&display=swap"
-        rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Mirza&family=Montserrat:wght@400;700&display=swap"
+        rel="stylesheet"> -->
     <title>Daily.Activity</title>
 </head>
 
 <body>
     <input class="header">
     <navbar></navbar>
+    <nav class="navbar navbar-style">
+        <div class="container fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Daily.Activity</a>
+            </div>
+            <div class="collapse navbar-collapse" id="brand">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="">Home</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
     <div class="container">
         <div class="row">
@@ -35,7 +50,8 @@
                 <a href="#" class="btn btn-mulai">Mulai</a>
             </div>
             <div class="col-sm-6 banner-img">
-                <img src="./assets/jumbotron.png" alt="mylist" class="img-jumbotron">
+                <img src="https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,f_jpg,w_480/rehq64gy39fwdgxsyvvb.jpg"
+                    alt="mylist" class="img-jumbotron">
             </div>
         </div>
     </div>
@@ -46,35 +62,78 @@
     <div class="container activity">
         <div class="row">
             <div class="col-sm-4">
-                <img src="./assets/membaca.jpg" alt="mylist" class="img-activity">
+                <img src="https://www.educenter.id/wp-content/uploads/2017/11/Membaca-Novel-7.jpg" alt="mylist"
+                    class="img-activity">
             </div>
             <div class="col-sm-4">
-                <img src="./assets/foto.jpg" alt="mylist" class="img-activity">
+                <img src="https://www.kelaspintar.id/blog/wp-content/uploads/2019/10/hobi.jpg" alt="mylist"
+                    class="img-activity">
             </div>
             <div class="col-sm-4">
-                <img src="./assets/melukis.jpg" alt="mylist" class="img-activity">
+                <img src="https://cdn.popmama.com/content-images/post/20190819/picsart-08-19-125239-19120351c051dae4bdeefd20c6f86387.jpg"
+                    alt="mylist" class="img-activity">
             </div>
         </div>
     </div>
     <div class="container activity">
         <div class="row">
             <div class="col-sm-4">
-                <img src="./assets/memasak.jpeg" alt="mylist" class="img-activity">
+                <img src="https://mnews-wp.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2021/11/12111305/Hobi-memasak.jpeg"
+                    alt="mylist" class="img-activity">
             </div>
             <div class="col-sm-4">
-                <img src="./assets/berkebun.jpeg" alt="mylist" class="img-activity">
+                <img src="https://d1bpj0tv6vfxyp.cloudfront.net/articles/132220_11-9-2020_12-10-7.jpeg" alt="mylist"
+                    class="img-activity">
             </div>
             <div class="col-sm-4">
-                <img src="./assets/yoga.jpg" alt="mylist" class="img-activity">
+                <img src="https://s3.bukalapak.com/bukalapak-kontenz-production/content_attachments/39298/w-1480/shutterstock_651660544.jpg.webp"
+                    alt="mylist" class="img-activity">
             </div>
         </div>
     </div>
 
     <p class="judul-input">Isi Biodatamu</p>
     <input></input>
-    <div class="col-sm-6">
-        <img src="./assets/input.png" alt="" class="img-input">
-    </div>
+    <div class="row form-input">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="inputNama" class="label-input">Nama</label>
+                        <input id="inputNama" type="text" class="form-control" placeholder="Nama Lengkap">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputUsia" class="label-input">Usia</label>
+                        <input id="inputUsia" type="number" class="form-control" placeholder="Usia">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="inputBookAuthor" class="label-input">Gender</label>
+                        <input id="inputBookAuthor" type="text" class="form-control" placeholder="Gender">
+                    </div> -->
+                    <div class="form-group">
+                        <label for="inputGender" class="label-input">Gender</label>
+                        <select class="form-control" id="inputGender" placeholder="Gender">
+                            <option>Laki-laki</option>
+                            <option>Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPekerjaan" class="label-input">Pekerjaan</label>
+                        <input id="inputPekerjaan" type="text" class="form-control" placeholder="Pekerjaan">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputHobi" class="label-input">Hobi</label>
+                        <input id="inputHobi" type="text" class="form-control" placeholder="Hobi">
+                    </div>
+                    <div class="form-group">
+                        <button id="buttonSave" class="btn">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <img src="https://github.com/Reistha10/Capstone_Project018/raw/main/input.png" alt="" class="img-input">
+        </div>
     </div>
 
     <p class="activity-judul">Aktifitas Anda</p>
@@ -104,48 +163,93 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="card about h-100">
-                    <img src="./assets/jumbotron.png" alt=""
-                        class="card-img-top rounded-circle img-thumbnail mx-auto d-block">
+                    <img src="https://github.com/Reistha10/Capstone_Project018/raw/main/photo_2021-07-14_23-48-04.jpg"
+                        alt="" class="card-img-top rounded-circle img-thumbnail mx-auto d-block">
                     <div class="card-body">
-                        <p class="card-text">This is a longer card with supporting text below as a
-                            natural lead-in
-                            to additional content. This content is a little bit longer.</p>
+                        <p class="card-text">
+                            Nama : Tiara Lailatul Nikmah <br>
+                            Mahasiswa S1 Teknik Informatika <br>
+                            Hobi Membaca<br>
+                            Alamat Desa Trimulyo RT/RW:04/02, Juwana, Pati<br>
+
+                        </p>
                     </div>
                 </div>
             </div>
 
             <div class="col-sm-6">
                 <div class="card about h-100">
-                    <img src="./assets/jumbotron.png" alt=""
-                        class="card-img-top rounded-circle img-thumbnail mx-auto d-block">
+                    <img src="https://github.com/Reistha10/Capstone_Project018/raw/main/photo_2021-12-22_20-53-37.jpg"
+                        alt="" class="card-img-top rounded-circle img-thumbnail mx-auto d-block">
                     <div class="card-body">
-                        <p class="card-text">This is a longer card with supporting text below as a
-                            natural lead-in
-                            to additional content. This content is a little bit longer.</p>
+                        <p class="card-text">
+                            <!-- <li>Nama : Reistha Ramadhanty</li>
+                            <li>Mahasiswa S1 Teknik Informatika</li>
+                            <li>Hobi Menggambar</li>
+                            <li>Alamat Jl. Samratulangi No. 06/13, Bandar Lampung</li> -->
+                            Nama : Reistha Ramadhanty <br>
+                            Mahasiswa S1 Teknik Informatika <br>
+                            Hobi Menggambar <br>
+                            Alamat Jl. Samratulangi No. 06/13, Bandar Lampung <br>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <div class="container faq">
+        <div class="card-body">
+            <h5 class="card-title contact-judul">FAQ</h5>
+            <p class="card-text contact-text">
+            <div class="row form-input-faq">
+                <div class="card-faq">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="inputNamaFaq" class="label-input">Nama</label>
+                            <input id="inputNamaFaq" type="text" class="form-control" placeholder="Nama">
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPertanyaan" class="label-input">Pertanyaan</label>
+                            <textarea class="form-control" id="inputPertanyaan" rows="3" type="text"
+                                placeholder="Pertanyaan"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button id="buttonSave" class="btn">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </p>
+        </div>
+        </p>
+    </div>
 
     <div class="container contact">
         <div class="card-body">
             <h5 class=" card-title contact-judul">Contact</h5>
-            <p class="card-text contact-text">Some quick example text to build on the card title and make up the
-                bulk of the
-                card's content.</p>
+            <p class="card-text contact-text">
+            <ul style="color: white;">
+                <p style="font-weight: bold;">Email : </p>
+                <li style="color: white;">tiaralaila21@gmail.com
+                </li>
+                <li style="color: white;">reistharamadhanty10@gmail.com
+                </li>
+                <br>
+                <p style="font-weight: bold;">Telepon : </p>
+                <li style="color: white;">+6289635924667 (Tiara)</li>
+                <li style="color: white;">+62895355431111 (Reistha)</li>
+                <br>
+                <p style="font-weight: bold;">DM Instagram : </p>
+                <li style="color: white;">@tiara_laila</li>
+                <li style="color: white;">@reistharamadhanty</li>
+            </ul>
+            </p>
+
         </div>
     </div>
 
-    <div class="container contact">
-        <div class="card-body">
-            <h5 class="card-title contact-judul">FAQ</h5>
-            <p class="card-text contact-text">Some quick example text to build on the card title and make up the
-                bulk of the
-                card's content.</p>
-        </div>
-    </div>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
