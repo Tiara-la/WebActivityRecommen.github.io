@@ -43,33 +43,6 @@ def main():
 if __name__=='__main__':
     main()
 
-# def fetch_poster(movie_id):
-#     url = "https://api.themoviedb.org/3/movie/{}?api_key=8265bd1679663a7ea12ac168da84d2e8&language=en-US".format(movie_id)
-#     data = requests.get(url)
-#     data = data.json()
-#     poster_path = data['poster_path']
-#     full_path = "https://image.tmdb.org/t/p/w500/" + poster_path
-#     return full_path
-# app = Flask(__name__)
-
-# @app.route('/')
-# def man():
-#     return render_template('index.html')
-
-# @app.route('/activity_recommendations', methods=['POST'])
-
-# def home():
-#     hobi = request.form['inputHobi']
-#     # data2 = request.form['b']
-#     # data3 = request.form['c']
-#     # data4 = request.form['d']
-#     # arr = np.array([[data1, data2, data3, data4]])
-#     pred = df.activity_recommendations(hobi)
-#     return render_template('index.html', data=pred)
-
-
-# if __name__ == "__main__":
-#     app.run(debug=True)
 
 def activity_recommendations(Hobi):
     index = df[df['Hobi'] == Hobi].index[0]
@@ -80,9 +53,7 @@ def activity_recommendations(Hobi):
     recommended_activity4 = []
     recommended_activity5 = []
     for i in distances[1:6]:
-        # fetch the movie poster
         Hobi = df.iloc[i[0]].Hobi
-        # recommended_movie_posters.append(fetch_poster(movie_id))
         recommended_activity1.append(df.iloc[i[0]].Hobi)
 
     return recommended_activity1, recommended_activity2, recommended_activity3, recommended_activity4, recommended_activity5
