@@ -3,6 +3,8 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 
 <head>
+
+    <meta name="dicoding:email" content="tiaralaila21@gmail.com">
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -98,13 +100,14 @@
         <div class="col-6">
             <div class="card">
                 <div class="card-body">
-                    <div class="form-group">
+                    <div class="form-group" method="POST" , action="{{url_for('index')}}">
                         <label for="inputNama" class="label-input">Nama</label>
-                        <input id="inputNama" type="text" class="form-control" placeholder="Nama Lengkap">
+                        <input id="inputNama" name="inputNama" type="text" class="form-control"
+                            placeholder="Nama Lengkap">
                     </div>
                     <div class="form-group">
                         <label for="inputUsia" class="label-input">Usia</label>
-                        <input id="inputUsia" type="number" class="form-control" placeholder="Usia">
+                        <input id="inputUsia" name="inputUsia" type="number" class="form-control" placeholder="Usia">
                     </div>
                     <!-- <div class="form-group">
                         <label for="inputBookAuthor" class="label-input">Gender</label>
@@ -112,21 +115,22 @@
                     </div> -->
                     <div class="form-group">
                         <label for="inputGender" class="label-input">Gender</label>
-                        <select class="form-control" id="inputGender" placeholder="Gender">
+                        <select class="form-control" name="inputGender" id="inputGender" placeholder="Gender">
                             <option>Laki-laki</option>
                             <option>Perempuan</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="inputPekerjaan" class="label-input">Pekerjaan</label>
-                        <input id="inputPekerjaan" type="text" class="form-control" placeholder="Pekerjaan">
+                        <input id="inputPekerjaan" name="inputPekerjaan" type="text" class="form-control"
+                            placeholder="Pekerjaan">
                     </div>
                     <div class="form-group">
                         <label for="inputHobi" class="label-input">Hobi</label>
-                        <input id="inputHobi" type="text" class="form-control" placeholder="Hobi">
+                        <input id="inputHobi" name="inputHobi" type="text" class="form-control" placeholder="Hobi">
                     </div>
                     <div class="form-group">
-                        <button id="buttonSave" class="btn">Submit</button>
+                        <button id="buttonSave" class="btn" value='predict!'>Submit</button>
                     </div>
                 </div>
             </div>
@@ -157,13 +161,14 @@
         </div>
     </div>
 
+
     <p class="activity-judul">About</p>
     <hr class="garis-2">
     <div class="container about-card">
         <div class="row">
             <div class="col-sm-6">
                 <div class="card about h-100">
-                    <img src="https://github.com/Reistha10/Capstone_Project018/raw/main/photo_2021-07-14_23-48-04.jpg"
+                    <img src="https://github.com/Reistha10/Capstone_Project018/raw/master/photo_2021-07-14_23-48-04.jpg"
                         alt="" class="card-img-top rounded-circle img-thumbnail mx-auto d-block">
                     <div class="card-body">
                         <p class="card-text">
@@ -179,7 +184,7 @@
 
             <div class="col-sm-6">
                 <div class="card about h-100">
-                    <img src="https://github.com/Reistha10/Capstone_Project018/raw/main/photo_2021-12-22_20-53-37.jpg"
+                    <img src="https://github.com/Reistha10/Capstone_Project018/raw/master/photo_2021-12-22_20-53-37.jpg"
                         alt="" class="card-img-top rounded-circle img-thumbnail mx-auto d-block">
                     <div class="card-body">
                         <p class="card-text">
@@ -253,6 +258,20 @@
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.5.10/prop-types.min.js'></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tarekraafat/autocomplete.js@7.2.0/dist/js/autoComplete.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='autocomplete.js')}}"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='rekomendasi.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static', filename='script.js')}}"></script>
+
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
