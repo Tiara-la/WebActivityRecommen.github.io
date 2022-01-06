@@ -7,86 +7,36 @@ Original file is located at
     https://colab.research.google.com/drive/1l8E81eHl9YKgoaMEz58gzg4kSEblgnUE
 """
 
-from flask import Flask, render_template, request
+import flask
+from flask import Flask, redirect, url_for, render_template, request
 import pickle
 import streamlit as st
 import requests
-
-# st.header('Activity Recommendation System')
-df = pickle.load(open('activity.pkl','rb'))
-similarity = pickle.load(open('similarity.pkl','rb'))
-
-app = Flask(__name__)
-
-
-
-@app.route('/')
-def man():
-    return render_template('index.html')
-
-@app.route('/predict', methods=['POST'])
-def activity_recommendations(Hobi):
-    index = df[df['Hobi'] == Hobi].index[0]
-    distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
-    data1 = request.form['inputHobi']
-    # data2 = request.form['b']
-    # data3 = request.form['c']
-    # data4 = request.form['d']
-    # arr = np.array([[data1, data2, data3, data4]])
-    pred = df.predict(data1)
-    for i in distances[1:6]:
-        Hobi = df.iloc[i[0]].Hobi
-        data1.append(df.iloc[i[0]].Hobi)
-    return render_template('index.html', data=pred)
-    
-if __name__=='__main__':
-       app.run(debug=True)
-    
-
-# def activity_recommendations(Hobi):
-   
-#     recommended_activity1 = []
-#     recommended_activity2 = []
-#     recommended_activity3 = []
-#     recommended_activity4 = []
-#     recommended_activity5 = []
-    
-#     return recommended_activity1, recommended_activity2, recommended_activity3, recommended_activity4, recommended_activity5
+import csv
+import difflib
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+import random
 
 
-# def main():
-#     # front end elements of the web page
-#     html_temp = """
-#       <div style ="background-color:#410042; padding:24px; border-radius:10px;">
-#     <h1 style ="color:white;text-align:center;">Website Rekomendasi Aktivitas (Daily Activity)</h1>
-#     </div>
+# app = Flask(__name__)
+# model = pickle.load(open('model.pkl', 'rb'))
 
-#     <div class="container">
-#         <div class="row">
-#             <div class="col-sm-6 banner-info">
-#                 <h2 class="judul">Rekomendasi kegiatan sehari-hari
-#                     yang dapat anda lakukan
-#                     di waktu luang</h2>
-#                 <p></p>
-#                 <p class="deskripsi">Ayo cari tau kegiatan apa yang dapat kita dilakukan...
-#                 </p>
-#             </div>
-#             <div class="col-sm-6 banner-img" style="margin-left: 10rem;">
-#                 <img src="https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,f_jpg,w_480/rehq64gy39fwdgxsyvvb.jpg"
-#                     style="height: 430px; border-radius:50px; " alt="mylist" class="img-jumbotron">
-#             </div>
-#         </div>
-#     </div>
+# @app.route('/')
+# def home():
+#     return render_template('index.html')
 
-#    """
+# @app.route('/predict',methods=['POST'])
+# def predict(Hobi):
+#     '''
+#     For rendering results on HTML GUI
+#     '''
+#     # int_features = [int(x) for x in request.form.values()]
+#     # final_features = [np.array(int_features)]
+#     # prediction = model.predict(final_features)
 
-#     st.markdown(html_temp, unsafe_allow_html = True)
-
-# if __name__=='__main__':
-#     main()
-
-
-# def activity_recommendations(Hobi):
+#     # output = round(prediction[0], 2)
 #     index = df[df['Hobi'] == Hobi].index[0]
 #     distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
 #     recommended_activity1 = []
@@ -98,19 +48,12 @@ if __name__=='__main__':
 #         Hobi = df.iloc[i[0]].Hobi
 #         recommended_activity1.append(df.iloc[i[0]].Hobi)
 
-#     return recommended_activity1, recommended_activity2, recommended_activity3, recommended_activity4, recommended_activity5
-
+#     return render_template('index.html', recommended_activity1, recommended_activity2, recommended_activity3, recommended_activity4, recommended_activity5)
 
 # st.header('Activity Recommendation System')
 # df = pickle.load(open('activity.pkl','rb'))
 # similarity = pickle.load(open('similarity.pkl','rb'))
 
-
-# activity_list = df['Hobi'].values
-# selected_activity = st.selectbox(
-#     "Type or select your hobby from the dropdown",
-#     activity_list
-# )
 
 # if st.button('Show Recommendation'):
 #     recommended_activity1,recommended_activity2, recommended_activity3, recommended_activity4, recommended_activity5 = activity_recommendations(selected_activity)
@@ -118,71 +61,324 @@ if __name__=='__main__':
 #     with col1:
 #         st.text(recommended_activity1[0])
 
-# def main() :
-#      html_temp = """
-#      <h1 class="activity-judul" style="color:#410042">About</h1>
-#     <hr class="garis-2">
-#     <div class="container about-card" style="text-align: center;">
-#         <div class="row">
-#             <div class="col-sm-6">
-#                 <div class="card about h-100">
-#                     <img src="https://github.com/Reistha10/Capstone_Project018/raw/master/photo_2021-07-14_23-48-04.jpg"
-#                     style="height: 200px; width: 200px;"
-#                         alt="" class="card-img-top rounded-circle img-thumbnail mx-auto d-block">
-#                     <div class="card-body">
-#                         <p class="card-text">
-#                             Nama : Tiara Lailatul Nikmah <br>
-#                             Mahasiswa S1 Teknik Informatika <br>
-#                             Hobi Membaca<br>
-#                             Alamat Desa Trimulyo RT/RW:04/02, Juwana, Pati<br>
-#                         </p>
-#                     </div>
-#                 </div>
-#             </div>
-#             <div class="col-sm-6">
-#                 <div class="card about h-100">
-#                     <img src="https://github.com/Reistha10/Capstone_Project018/raw/master/photo_2021-12-22_20-53-37.jpg"
-#                         style="height: 200px; width: 200px; "alt="" class="card-img-top rounded-circle img-thumbnail mx-auto d-block">
-#                     <div class="card-body">
-#                         <p class="card-text">
-#                             <!-- <li>Nama : Reistha Ramadhanty</li>
-#                             <li>Mahasiswa S1 Teknik Informatika</li>
-#                             <li>Hobi Menggambar</li>
-#                             <li>Alamat Jl. Samratulangi No. 06/13, Bandar Lampung</li> -->
-#                             Nama : Reistha Ramadhanty <br>
-#                             Mahasiswa S1 Teknik Informatika <br>
-#                             Hobi Menggambar <br>
-#                             Alamat Jl. Samratulangi No. 06/13, Bandar Lampung <br>
-#                         </p>
-#                     </div>
-#                 </div>
-#             </div>
-#         </div>
-#     </div>
-#     <div class="container contact">
-#         <div class="card-body">
-#             <h1 class=" card-title contact-judul" style="color:#410042">Contact</h1>
-#              <hr class="garis-2">
-#             <p class="card-text contact-text">
-#             <ul style="color: white; background-color: #410042; text-align:center; padding:30px; border-radius:30px;">
-#                 <p style="font-weight: bold;">Email : </p>
-#                 <li style="color: white;">tiaralaila21@gmail.com
-#                 </li>
-#                 <li style="color: white;">reistharamadhanty10@gmail.com
-#                 </li>
-#                 <br>
-#                 <p style="font-weight: bold;">Telepon : </p>
-#                 <li style="color: white;">+6289635924667 (Tiara)</li>
-#                 <li style="color: white;">+62895355431111 (Reistha)</li>
-#                 <br>
-#                 <p style="font-weight: bold;">DM Instagram : </p>
-#                 <li style="color: white;">@tiara_laila</li>
-#                 <li style="color: white;">@reistharamadhanty</li>
-#             </ul>
-#             </p>
-#         </div>
-#     </div>
-#      """
-#      st.markdown(html_temp, unsafe_allow_html = True)
+# @app.route('/predict_api',methods=['POST'])
+# def predict_api():
+#     '''
+#     For direct API calls trought request
+#     '''
+#     data = request.get_json(force=True)
+#     prediction = model.predict([np.array(list(data.values()))])
+
+#     output = prediction[0]
+#     return jsonify(output)
+
+# if __name__ == "__main__":
+#     app.run(debug=True)
+
+# # st.header('Activity Recommendation System')
+# df = pickle.load(open('activity.pkl','rb'))
+# similarity = pickle.load(open('similarity.pkl','rb'))
+
+app = Flask(__name__)
+
+@app.route('/')
+def main():
+    return render_template('index.html')
+
+@app.route('/predict', methods=['POST'])
+def predict(Hobi):
+    index = df[df['Hobi'] == Hobi].index[0]
+    distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
+    data1 = request.form['inputHobi']
+    # data2 = request.form['b']
+    # data3 = request.form['c']
+    # data4 = request.form['d']
+    # arr = np.array([[data1, data2, data3, data4]])
+    # pred = df.predict(data1)
+    for i in distances[1:6]:
+        Hobi = df.iloc[i[0]].Hobi
+        data1.append(df.iloc[i[0]].Hobi)
+    return render_template('index.html', data1)
+
+df = pickle.load(open('activity.pkl','rb'))
+similarity = pickle.load(open('similarity.pkl','rb'))
+
+if st.button('Show Recommendation'):
+    recommended_activity1,recommended_activity2, recommended_activity3, recommended_activity4, recommended_activity5 = activity_recommendations(selected_activity)
+    col1, col2, col3, col4, col5 = st.beta_columns(5)
+    with col1:
+        st.text(recommended_activity1[0])
+
+# app = flask.Flask(__name__, template_folder='templates')
+
+# df = pd.read_csv('./model/Human Activity.csv')
+# count = CountVectorizer(stop_words='english')
+# count_matrix = count.fit_transform(df['soup'])
+
+# cosine_sim2 = cosine_similarity(count_matrix, count_matrix)
+
+# df = df.reset_index()
+# indices = pd.Series(df.index, index=df['Hobi'])
+# all_titles = [df['Hobi'][i] for i in range(len(df['Hobi']))]
+
+# def get_recommendations(title):
+#     cosine_sim = cosine_similarity(count_matrix, count_matrix)
+#     idx = indices[title]
+#     sim_scores = list(enumerate(cosine_sim[idx]))
+#     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
+#     sim_scores = sim_scores[1:6]
+#     activity_indices = [i[0] for i in sim_scores]
+#     hob = df['Hobi'].iloc[activity_indices]
+#     usa = df['Usia'].iloc[activity_indices]
+#     rentusia = df['Rentang_usia'].iloc[activity_indices]
+#     pekerj=df['Pekerjaan'].iloc[activity_indices]
+#     keg1=df['Kegiatan_1'].iloc[activity_indices]
+#     keg2=df['Kegiatan_2'].iloc[activity_indices]
+#     keg3=df['Kegiatan_3'].iloc[activity_indices]
+#     keg4=df['Kegiatan_4'].iloc[activity_indices]
+#     keg5=df['Kegiatan_5'].iloc[activity_indices]
+
+
+#     return_df = pd.DataFrame(columns=['Hobi'])
+#     return_df['Hobi'] = hob
+#     return_df['Usia'] = usa
+#     return_df['Rentang_usia'] = rentusia
+#     return_df['Pekerjaan']=pekerj
+#     return_df['Kegiatan_1']=keg1
+#     return_df['Kegiatan_2']=keg2
+#     return_df['Kegiatan_3']=keg3
+#     return_df['Kegiatan_4']=keg4
+#     return_df['Kegiatan_5']=keg5
+#     return return_df
+
+# def get_suggestions():
+#     data = pd.read_csv('Human Activity.csv')
+#     return list(data['Hobi'].str.capitalize())
+
+# app = Flask(__name__)
+# @app.route("/")
+# @app.route("/index")
+# def index():
+#     NewActivities=[]
+#     with open('Testr.csv','r') as csvfile:
+#         readCSV = csv.reader(csvfile)
+#         NewActivities.append(random.choice(list(readCSV)))
+#     m_hobi = NewActivities[0][0]
+#     m_hobi = m_hobi.hobi()
+    
+#     with open('Testr.csv', 'a',newline='') as csv_file:
+#         fieldnames = ['Activity']
+#         writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+#         writer.writerow({'Activity': m_hobi})
+#         result_final = get_recommendations(m_hobi)
+#         hobi = []
+#         usia = []
+#         rentangusia = []
+#         pekerjaan =[]
+#         kegiatan1 =[]
+#         kegiatan2 =[]
+#         kegiatan3 =[]
+#         kegiatan4 =[]
+#         kegiatan5 =[]
+#         for i in range(len(result_final)):
+#             hobi.append(result_final.iloc[i][0])
+#             usia.append(result_final.iloc[i][1])
+#             rentangusia.append(result_final.iloc[i][2])
+#             pekerjaan.append(result_final.iloc[i][3])
+#             kegiatan1.append(result_final.iloc[i][4])
+#             kegiatan2.append(result_final.iloc[i][5])
+#             kegiatan3.append(result_final.iloc[i][6])
+#             kegiatan4.append(result_final.iloc[i][7])
+#             kegiatan5.append(result_final.iloc[i][8])
+#     suggestions = get_suggestions()
+    
+#     return render_template('index.html',suggestions=suggestions,Kegiatan_1=kegiatan1[5:],Kegiatan_2=kegiatan2[5:],Kegiatan_3=kegiatan3[5:], Kegiatan_4=kegiatan4[5:], Kegiatan_5=kegiatan5[5:], Pekerjaan=pekerjaan, Rentang_usia=rentangusia, Usia=usia, Hobi=hobi, search_hobi=m_hobi)
+
+# # Set up the main route
+# @app.route('/index', methods=['GET', 'POST'])
+
+# def main():
+#     if flask.request.method == 'GET':
+#         return(flask.render_template('index.html'))
+
+#     if flask.request.method == 'POST':
+#         m_hobi = flask.request.form['inputHobi']
+#         m_hobi = m_hobi.hobi()
+#         if m_hobi not in all_titles:
+#             return(flask.render_template('index.html',name=m_hobi))
+#         else:
+#             with open('Testr.csv', 'a',newline='') as csv_file:
+#                 fieldnames = ['Activity']
+#                 writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+#                 writer.writerow({'Activity': m_hobi})
+#             result_final = get_recommendations(m_hobi)
+#             hobi = []
+#             usia = []
+#             rentangusia = []
+#             pekerjaan =[]
+#             kegiatan1 =[]
+#             kegiatan2 =[]
+#             kegiatan3 =[]
+#             kegiatan4 =[]
+#             kegiatan5 =[]
+#             for i in range(len(result_final)):
+#                 hobi.append(result_final.iloc[i][0])
+#                 usia.append(result_final.iloc[i][1])
+#                 rentangusia.append(result_final.iloc[i][2])
+#                 pekerjaan.append(result_final.iloc[i][3])
+#                 kegiatan1.append(result_final.iloc[i][4])
+#                 kegiatan2.append(result_final.iloc[i][5])
+#                 kegiatan3.append(result_final.iloc[i][6])
+#                 kegiatan4.append(result_final.iloc[i][7])
+#                 kegiatan5.append(result_final.iloc[i][8])
+                
+#             return flask.render_template('index.html',Kegiatan_1=kegiatan1[5:],Kegiatan_2=kegiatan2[5:],Kegiatan_3=kegiatan3[5:], Kegiatan_4=kegiatan4[5:], Kegiatan_5=kegiatan5[5:], Pekerjaan=pekerjaan, Rentang_usia=rentangusia, Usia=usia, Hobi=hobi, search_hobi=m_hobi)
+
+
+# if __name__=='__main__':
+#        app.run(debug=True)
+    
+
+# # def activity_recommendations(Hobi):
+   
+# #     recommended_activity1 = []
+# #     recommended_activity2 = []
+# #     recommended_activity3 = []
+# #     recommended_activity4 = []
+# #     recommended_activity5 = []
+    
+# #     return recommended_activity1, recommended_activity2, recommended_activity3, recommended_activity4, recommended_activity5
+
+
+# # def main():
+# #     # front end elements of the web page
+# #     html_temp = """
+# #       <div style ="background-color:#410042; padding:24px; border-radius:10px;">
+# #     <h1 style ="color:white;text-align:center;">Website Rekomendasi Aktivitas (Daily Activity)</h1>
+# #     </div>
+
+# #     <div class="container">
+# #         <div class="row">
+# #             <div class="col-sm-6 banner-info">
+# #                 <h2 class="judul">Rekomendasi kegiatan sehari-hari
+# #                     yang dapat anda lakukan
+# #                     di waktu luang</h2>
+# #                 <p></p>
+# #                 <p class="deskripsi">Ayo cari tau kegiatan apa yang dapat kita dilakukan...
+# #                 </p>
+# #             </div>
+# #             <div class="col-sm-6 banner-img" style="margin-left: 10rem;">
+# #                 <img src="https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,q_auto:best,f_jpg,w_480/rehq64gy39fwdgxsyvvb.jpg"
+# #                     style="height: 430px; border-radius:50px; " alt="mylist" class="img-jumbotron">
+# #             </div>
+# #         </div>
+# #     </div>
+
+# #    """
+
+# #     st.markdown(html_temp, unsafe_allow_html = True)
+
+# # if __name__=='__main__':
+# #     main()
+
+
+# # def activity_recommendations(Hobi):
+# #     index = df[df['Hobi'] == Hobi].index[0]
+# #     distances = sorted(list(enumerate(similarity[index])), reverse=True, key=lambda x: x[1])
+# #     recommended_activity1 = []
+# #     recommended_activity2 = []
+# #     recommended_activity3 = []
+# #     recommended_activity4 = []
+# #     recommended_activity5 = []
+# #     for i in distances[1:6]:
+# #         Hobi = df.iloc[i[0]].Hobi
+# #         recommended_activity1.append(df.iloc[i[0]].Hobi)
+
+# #     return recommended_activity1, recommended_activity2, recommended_activity3, recommended_activity4, recommended_activity5
+
+
+# # st.header('Activity Recommendation System')
+# # df = pickle.load(open('activity.pkl','rb'))
+# # similarity = pickle.load(open('similarity.pkl','rb'))
+
+
+# # activity_list = df['Hobi'].values
+# # selected_activity = st.selectbox(
+# #     "Type or select your hobby from the dropdown",
+# #     activity_list
+# # )
+
+# # if st.button('Show Recommendation'):
+# #     recommended_activity1,recommended_activity2, recommended_activity3, recommended_activity4, recommended_activity5 = activity_recommendations(selected_activity)
+# #     col1, col2, col3, col4, col5 = st.beta_columns(5)
+# #     with col1:
+# #         st.text(recommended_activity1[0])
+
+# # def main() :
+# #      html_temp = """
+# #      <h1 class="activity-judul" style="color:#410042">About</h1>
+# #     <hr class="garis-2">
+# #     <div class="container about-card" style="text-align: center;">
+# #         <div class="row">
+# #             <div class="col-sm-6">
+# #                 <div class="card about h-100">
+# #                     <img src="https://github.com/Reistha10/Capstone_Project018/raw/master/photo_2021-07-14_23-48-04.jpg"
+# #                     style="height: 200px; width: 200px;"
+# #                         alt="" class="card-img-top rounded-circle img-thumbnail mx-auto d-block">
+# #                     <div class="card-body">
+# #                         <p class="card-text">
+# #                             Nama : Tiara Lailatul Nikmah <br>
+# #                             Mahasiswa S1 Teknik Informatika <br>
+# #                             Hobi Membaca<br>
+# #                             Alamat Desa Trimulyo RT/RW:04/02, Juwana, Pati<br>
+# #                         </p>
+# #                     </div>
+# #                 </div>
+# #             </div>
+# #             <div class="col-sm-6">
+# #                 <div class="card about h-100">
+# #                     <img src="https://github.com/Reistha10/Capstone_Project018/raw/master/photo_2021-12-22_20-53-37.jpg"
+# #                         style="height: 200px; width: 200px; "alt="" class="card-img-top rounded-circle img-thumbnail mx-auto d-block">
+# #                     <div class="card-body">
+# #                         <p class="card-text">
+# #                             <!-- <li>Nama : Reistha Ramadhanty</li>
+# #                             <li>Mahasiswa S1 Teknik Informatika</li>
+# #                             <li>Hobi Menggambar</li>
+# #                             <li>Alamat Jl. Samratulangi No. 06/13, Bandar Lampung</li> -->
+# #                             Nama : Reistha Ramadhanty <br>
+# #                             Mahasiswa S1 Teknik Informatika <br>
+# #                             Hobi Menggambar <br>
+# #                             Alamat Jl. Samratulangi No. 06/13, Bandar Lampung <br>
+# #                         </p>
+# #                     </div>
+# #                 </div>
+# #             </div>
+# #         </div>
+# #     </div>
+# #     <div class="container contact">
+# #         <div class="card-body">
+# #             <h1 class=" card-title contact-judul" style="color:#410042">Contact</h1>
+# #              <hr class="garis-2">
+# #             <p class="card-text contact-text">
+# #             <ul style="color: white; background-color: #410042; text-align:center; padding:30px; border-radius:30px;">
+# #                 <p style="font-weight: bold;">Email : </p>
+# #                 <li style="color: white;">tiaralaila21@gmail.com
+# #                 </li>
+# #                 <li style="color: white;">reistharamadhanty10@gmail.com
+# #                 </li>
+# #                 <br>
+# #                 <p style="font-weight: bold;">Telepon : </p>
+# #                 <li style="color: white;">+6289635924667 (Tiara)</li>
+# #                 <li style="color: white;">+62895355431111 (Reistha)</li>
+# #                 <br>
+# #                 <p style="font-weight: bold;">DM Instagram : </p>
+# #                 <li style="color: white;">@tiara_laila</li>
+# #                 <li style="color: white;">@reistharamadhanty</li>
+# #             </ul>
+# #             </p>
+# #         </div>
+# #     </div>
+# #      """
+# #      st.markdown(html_temp, unsafe_allow_html = True)
 
 

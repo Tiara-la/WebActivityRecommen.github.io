@@ -12,7 +12,7 @@ header {
     text-transform: uppercase;
 }
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat';
 }
 .navbar-brand {
     color: #410042;
